@@ -1,0 +1,205 @@
+@import url("https://www.goodtypefoundry.com/chapter");
+@import url("https://www.myfonts.com/fonts/rene-bieder/mackay/");
+@import url("https://www.colophon-foundry.org/typefaces/basis-grotesque/");
+
+@font-face {
+  font-family: "SF Pro";
+  src: url("../../../fonts/sf-pro-display-cufonfonts/SFPRODISPLAYREGULAR.OTF")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "New York Extra Large";
+  src: url("../../../fonts/new-york-extra-large-cufonfonts/NewYorkExtraLargeMedium.otf")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nokia CellPhone";
+  src: url("../../../fonts/nokia_cellphone/nokiafc22.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Mono";
+  src: url("../../../fonts/sf-mono/SFMonoRegular.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Harriet Text";
+  src: url("../../../fonts/harriet-text/HARRIETTEXTMEDIUM.OTF")
+    format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --primary-color: #ffd900;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  line-height: 0;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "SF Pro", sans-serif;
+  box-sizing: border-box;
+}
+
+header {
+  height: 35rem;
+  background: var(--primary-color);
+  padding: 6.5rem 13rem 3.2rem;
+  span {
+    font-family: "SF Mono", sans-serif;
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+  h2 {
+    font-family: "New York Extra Large", sans-serif;
+    font-size: 20rem;
+    line-height: 20.38rem;
+    letter-spacing: 1rem;
+  }
+}
+
+main {
+  padding: 10.03rem 13rem;
+  > ul {
+    > li {
+      > h3 {
+        font-family: "New York Extra Large", sans-serif;
+        font-size: 4.4rem;
+        line-height: 5.3rem;
+        letter-spacing: 0.1rem;
+      }
+      .section-text {
+        border-left: 0.6rem solid #000;
+        p {
+          margin-top: 2.6rem;
+          padding-left: 2.9rem;
+          font-size: 2rem;
+          line-height: 2.4rem;
+          width: 75%;
+          letter-spacing: 0.1rem;
+        }
+        ul {
+          padding-left: 2.9rem;
+          li {
+            h4 {
+              letter-spacing: 0.1rem;
+            }
+            div {
+              span {
+                display: block;
+                font-size: 2rem;
+                line-height: 2.4rem;
+                letter-spacing: 0.1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+/* Styles mặc định cho màn hình lớn (Desktop) */
+
+/* Extra large (xl): <1200px */
+@media (max-width: 1199.98px) {
+  /* Styles cho extra large (xl) */
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5rem 6rem 2.2rem;
+    span {
+      font-size: 1.6rem;
+      line-height: 1.5;
+    }
+    h2 {
+      font-size: 10rem;
+      line-height: 1.5;
+      letter-spacing: 0.5rem;
+    }
+  }
+
+  main {
+    padding: 5.03rem 6rem;
+    > ul {
+      > li {
+        > h3 {
+          font-size: 2.4rem;
+          line-height: 1.5;
+        }
+        .section-text {
+          p {
+            margin-top: 2.6rem;
+            padding: 0 2.9rem;
+            font-size: 1.6rem;
+            line-height: 1.5;
+            width: 100% !important;
+          }
+          ul {
+            padding-left: 2.9rem;
+            li {
+              h4 {
+                font-size: 2.4rem !important;
+                line-height: 1.5 !important;
+              }
+              div {
+                margin-top: 2rem !important;
+                margin-bottom: 2rem !important;
+                span {
+                  display: block;
+                  font-size: 1.6rem;
+                  line-height: 1.5;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Large (lg): <992px */
+@media (max-width: 991.98px) {
+  /* Styles cho large (lg) */
+}
+
+/* Medium (md): <768px */
+@media (max-width: 767.98px) {
+  /* Styles cho medium (md) */
+}
+
+/* Small (sm): <576px */
+@media (max-width: 575.98px) {
+  /* Styles cho small (sm) */
+  header {
+    padding: 1rem;
+  }
+}
