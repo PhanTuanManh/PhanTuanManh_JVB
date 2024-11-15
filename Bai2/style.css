@@ -22,7 +22,11 @@ li {
 
 .active {
   background: #4cc2ff;
+  color: #000;
   border-radius: 50%;
+  &:hover {
+    background: #4bb0ef !important;
+  }
 }
 
 .inactive {
@@ -158,6 +162,10 @@ h3 {
         .dates li.today {
           background: #4cc2ff;
           border-radius: 50%;
+          color: #000;
+          &:hover {
+            background: #4bb0ef !important;
+          }
         }
 
         .dates li.inactive,
@@ -201,6 +209,9 @@ h3 {
                 &:active {
                   outline: 1px solid #4cc2ff;
                   color: #4cc2ff;
+                  &:hover {
+                    background: #4bb0ef !important;
+                  }
                 }
               }
             }
