@@ -2,27 +2,83 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calendar App</title>
+    <title>Calendar</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
   </head>
   <body>
-    <div id="calendar-container">
-      <div id="calendar-header">
-        <button id="prev-month">&lt;</button>
-        <span id="month-year"></span>
-        <button id="next-month">&gt;</button>
+    <div class="main">
+      <div class="calendar-container">
+        <section class="header">
+          <h2></h2>
+          <div class="header-icon">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </section>
+        <section class="body">
+          <div class="calendar">
+            <div class="top-content">
+              <div class="head">
+                <h3></h3>
+              </div>
+              <nav>
+                <div class="prev-container" id="prev">
+                  <i class="fa-solid fa-sort-up"></i>
+                </div>
+                <div class="next-container" id="next">
+                  <i class="fa-solid fa-sort-down"></i>
+                </div>
+              </nav>
+            </div>
+            <div class="contents">
+              <div class="days-container">
+                <ul class="days">
+                  <li>Su</li>
+                  <li>Mo</li>
+                  <li>Tu</li>
+                  <li>We</li>
+                  <li>Th</li>
+                  <li>Fr</li>
+                  <li>Sa</li>
+                </ul>
+                <div class="dates-wrapper">
+                  <ul class="dates"></ul>
+                </div>
+              </div>
+              <div class="months-container hidden">
+                <ul class="months"></ul>
+              </div>
+              <div class="years-container hidden">
+                <ul class="years"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="footer">
+          <div class="set-time">
+            <div class="icon-minus">
+              <i class="fa-solid fa-minus"></i>
+            </div>
+            <span> <strong></strong> mins</span>
+            <div class="icon-plus">
+              <i class="fa-solid fa-plus"></i>
+            </div>
+          </div>
+          <div class="start-focus">
+            <i class="fa-solid fa-play"></i>
+            <span>Focus</span>
+          </div>
+          <div class="end-session hidden">
+            <i class="fa-solid fa-stop"></i>
+            <span>End session</span>
+          </div>
+        </section>
       </div>
-      <div id="calendar-days">
-        <div class="day-name">Sun</div>
-        <div class="day-name">Mon</div>
-        <div class="day-name">Tue</div>
-        <div class="day-name">Wed</div>
-        <div class="day-name">Thu</div>
-        <div class="day-name">Fri</div>
-        <div class="day-name">Sat</div>
-      </div>
-      <div id="calendar-grid"></div>
     </div>
     <script src="script.js"></script>
   </body>
