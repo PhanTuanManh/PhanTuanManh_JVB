@@ -74,7 +74,6 @@ function renderMonths() {
   header.classList.remove("inactive");
   const monthList = document.querySelector(".months");
   monthList.innerHTML = "";
-  // Display all 12 months, with `active` class only on `currentMonth`
   months.forEach((month, index) => {
     const monthItem = document.createElement("li");
     monthItem.textContent = month.slice(0, 3);
@@ -89,11 +88,15 @@ function renderMonths() {
     monthList.appendChild(monthItem);
   });
 
-  // Add inactive placeholders for 4 months after the end of the year
   for (let i = 0; i < 4; i++) {
     const nextMonth = document.createElement("li");
     nextMonth.textContent = months[i].slice(0, 3);
     nextMonth.classList.add("inactive");
+    nextMonth.addEventListener("click", () => {
+      selectedMonth = i;
+      selectedYear += 1;
+      switchToDatesView();
+    });
     monthList.appendChild(nextMonth);
   }
 
@@ -112,10 +115,8 @@ function renderYears() {
     yearItem.classList.toggle("active", year === currentYear);
     yearItem.classList.toggle("inactive", year > startYear + 9);
     yearItem.addEventListener("click", () => {
-      if (!yearItem.classList.contains("inactive")) {
-        selectedYear = year; // Temporarily hold selected year without affecting currentYear
-        switchToMonthsView();
-      }
+      selectedYear = year;
+      switchToMonthsView();
     });
     yearList.appendChild(yearItem);
   }
@@ -318,4 +319,23 @@ document.addEventListener("DOMContentLoaded", () => {
     startFocus.classList.remove("hidden");
     endSession.classList.add("hidden");
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  dates.addEventListener("click", (e) => {
+    if (e.target.tagName === "LI") {
+      const target = e.target;
+
+      if (target.classList.contains("target-day")) {
+        target.classList.remove("target-day");
+      } else {
+        const previouslySelected = dates.querySelector(".target-day");
+        if (previouslySelected) {
+          previouslySelected.classList.remove("target-day");
+        }
+
+        target.classList.add("target-day");
+      }
+    }
+  });
 });
