@@ -51,6 +51,10 @@ h3 {
   font-weight: 600;
 }
 
+.target-day {
+  outline: 1px solid #4cc2ff;
+  color: #4cc2ff;
+}
 .calendar-container {
   width: clamp(320px, 400px, 430px);
   border: 1px solid #303030;
@@ -187,7 +191,11 @@ h3 {
             }
           }
         }
-
+        .months-container,
+        .years-container,
+        .days-container {
+          height: 357px;
+        }
         .days-container {
           .days {
             display: grid;
@@ -196,22 +204,16 @@ h3 {
             text-align: center;
           }
           .dates-wrapper {
-            height: 283px;
+            height: 303px;
             .dates {
               display: grid;
               grid-template-columns: repeat(7, 1fr);
               grid-template-rows: repeat(6, 1fr);
               column-gap: 8px;
+              row-gap: 4px;
               li {
                 &:hover {
                   background: #363636;
-                }
-                &:active {
-                  outline: 1px solid #4cc2ff;
-                  color: #4cc2ff;
-                  &:hover {
-                    background: #4bb0ef !important;
-                  }
                 }
               }
             }
@@ -220,6 +222,7 @@ h3 {
       }
     }
   }
+
   .footer {
     display: flex;
     align-items: center;
