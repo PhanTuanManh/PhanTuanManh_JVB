@@ -24,7 +24,7 @@ function ModalDetails({ isOpen, onClose, data }) {
     <Modal
       isOpen={isOpen}
       onRequestClose={onClose}
-      className="px-5 pb-4 modal-class flex-col absolute lg:w-[800px] w-[380px] mx-auto top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-white flex border-none outline-none shadow-lg"
+      className="px-5 pb-4 rounded-xl modal-class flex-col absolute lg:w-[800px] w-[380px] mx-auto top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-black bg-white flex border-none outline-none shadow-lg"
     >
       <div className="flex justify-between mb-4">
         <h2 className="text-3xl">{formatDate(data.date)}</h2>
