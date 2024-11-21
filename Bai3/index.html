@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinite Slider</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #f0f0f0;
+      }
+      .slider-container {
+        position: relative;
+        width: 80%;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: grab;
+      }
+      .slider {
+        display: flex;
+        gap: 20px;
+      }
+      .slider-item {
+        min-width: 200px;
+        height: 150px;
+        background: #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: #333;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slider-container">
+      <div class="slider">
+        <!-- Original items -->
+        <div class="slider-item">1</div>
+        <div class="slider-item">2</div>
+        <div class="slider-item">3</div>
+        <div class="slider-item">4</div>
+        <div class="slider-item">5</div>
+        <div class="slider-item">6</div>
+        <div class="slider-item">7</div>
+        <!-- Duplicate items for infinite scrolling -->
+        <div class="slider-item">1</div>
+        <div class="slider-item">2</div>
+        <div class="slider-item">3</div>
+        <div class="slider-item">4</div>
+        <div class="slider-item">5</div>
+        <div class="slider-item">6</div>
+        <div class="slider-item">7</div>
+      </div>
+    </div>
+
+    <script>
+      const sliderContainer = document.querySelector(".slider-container");
+      const slider = document.querySelector(".slider");
+      let isDragging = false;
+      let startX = 0;
+      let scrollLeft = 0;
+
+      // Mouse down event
+      sliderContainer.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        sliderContainer.style.cursor = "grabbing";
+        startX = e.pageX;
+        scrollLeft = sliderContainer.scrollLeft;
+      });
+
+      // Mouse leave event
+      sliderContainer.addEventListener("mouseleave", () => {
+        isDragging = false;
+        sliderContainer.style.cursor = "grab";
+      });
+
+      // Mouse up event
+      sliderContainer.addEventListener("mouseup", () => {
+        isDragging = false;
+        sliderContainer.style.cursor = "grab";
+      });
+
+
+      sliderContainer.addEventListener("mousemove", (e) => {
+        if (!isDragging) return; // Stop if not dragging
+        e.preventDefault();
+        const x = e.pageX - startX;
+        sliderContainer.scrollLeft = scrollLeft - x;
+      });
+
+      // Infinite scroll logic
+      sliderContainer.addEventListener("scroll", () => {
+        const maxScrollLeft = slider.scrollWidth / 2;
+        const currentScroll = sliderContainer.scrollLeft;
+
+        if (currentScroll >= maxScrollLeft) {
+          sliderContainer.scrollLeft = currentScroll - maxScrollLeft;
+        } else if (currentScroll <= 0) {
+          sliderContainer.scrollLeft = currentScroll + maxScrollLeft;
+        }
+      });
+
+      // Adjust scroll position initially
+      window.addEventListener("load", () => {
+        sliderContainer.scrollLeft = slider.scrollWidth / 2;
+      });
+    </script>
+  </body>
+</html>
