@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-function Header({ city, setCity }) {
+function Header({ city, setCity, setError }) {
   const [inputValue, setInputValue] = useState(city); // Track the input value
   const [debounceTimeout, setDebounceTimeout] = useState(null); // Track debounce timeout
 
   const handleInputChange = (e) => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setInputValue(value);
 
     if (debounceTimeout) {
@@ -13,8 +13,14 @@ function Header({ city, setCity }) {
     }
 
     const timeout = setTimeout(() => {
-      if (value.trim() && value !== city) {
+      if (!value) {
+        setError("Please enter a city name.");
+        return;
+      }
+
+      if (value !== city) {
         setCity(value);
+        setError("");
       }
     }, 500);
 

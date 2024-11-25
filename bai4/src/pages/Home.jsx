@@ -13,23 +13,28 @@ function Home() {
   const [currentHourData, setCurrentHourData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [error, setError] = useState(""); // State for error message
 
   useEffect(() => {
-    const loadWeather = async () => {
-      const data = await fetchWeatherData(city);
-      if (data) {
-        setWeatherData(data);
-        const today = data.forecast.forecastday.find(
-          (day) => day.date === new Date().toISOString().split("T")[0]
-        );
-        setSelectedDay(today || data.forecast.forecastday[0]);
+    if (!city) return; // Do nothing if city is empty
 
-        // Get real-time data for today's forecast
-        setCurrentHourData(
-          getRealTimeHourData(today || data.forecast.forecastday[0])
-        );
+    const loadWeather = async () => {
+      try {
+        const data = await fetchWeatherData(city);
+        if (data) {
+          setWeatherData(data);
+          const today = data.forecast.forecastday[0];
+          setSelectedDay(today);
+          setCurrentHourData(getRealTimeHourData(today));
+          setError(""); // Clear error if data is successfully fetched
+        } else {
+          setError(`No weather data found for "${city}".`);
+        }
+      } catch (err) {
+        setError("Failed to fetch weather data. Please try again later.");
       }
     };
+
     loadWeather();
   }, [city]);
 
@@ -58,25 +63,28 @@ function Home() {
   };
 
   return (
-    <div className="p-6 bg-white shadow shadow-lg rounded-xl">
-      <Header city={city} setCity={setCity} />
-      {weatherData && (
-        <div className="flex lg:flex-row flex-col justify-between gap-8 w-full items-center">
-          <div className="lg:w-[300px]">
-            {/* Pass real-time data to CurrentWeatherCard */}
+    <div className="p-6 bg-white shadow shadow-lg rounded-xl ">
+      <Header city={city} setCity={setCity} setError={setError} />
+      {error && (
+        <div className="text-red-500 text-center pt-10 font-semibold  w-[932px] h-[545px]">
+          {error}
+        </div>
+      )}
+      {weatherData && !error && (
+        <div className="flex justify-between gap-8 w-full items-center">
+          <div className="w-[300px]">
             <CurrentWeatherCard data={currentHourData || weatherData.current} />
           </div>
-          <div className="lg:w-[600px] flex flex-col gap-5">
+          <div className="w-[600px] flex flex-col gap-5">
             <Graph data={selectedDay || weatherData.forecast.forecastday[0]} />
-
-            <div className="flex flex-row lg:gap-5 gap-0 lg:justify-start justify-between items-center overflow-x-auto h-[170px]">
+            <div className="flex flex-row gap-5 justify-start items-center overflow-x-auto h-[170px]">
               {weatherData.forecast.forecastday.map((day, idx) => (
                 <ForecastCard
                   key={idx}
                   day={day}
-                  onClick={() => handleCardClick(day)} // Single click
+                  onClick={() => handleCardClick(day)}
                   onDoubleClick={() => handleCardDoubleClick(day)}
-                  isSelected={selectedDay?.date === day.date} // Double click
+                  isSelected={selectedDay?.date === day.date}
                 />
               ))}
             </div>
